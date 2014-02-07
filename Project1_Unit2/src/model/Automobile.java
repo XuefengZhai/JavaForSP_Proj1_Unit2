@@ -145,6 +145,9 @@ java.io.Serializable
 	}
 	
 	
+	/*
+	 * Delete Option set
+	 */
 	public void deleteOptionSet(String name){
 		int i;
 		for(i=0;i<optSet.size();i++){
@@ -156,6 +159,10 @@ java.io.Serializable
 		
 	}
 	
+	/*
+	 * Delete Option
+	 */
+
 	public void deleteOption(String optionSetName, String optionName){
 		int i,j;
 		for(i=0;i<optSet.size();i++){
@@ -174,7 +181,10 @@ java.io.Serializable
 		optSet.get(i).getOpt().remove(j);
 		
 	}
-
+	
+	/*
+	 * Update
+	 */
 	public void updateOptionSetName (String oldName, String newName){
 		findOptSet(oldName).setName(newName);
 	}
@@ -184,6 +194,9 @@ java.io.Serializable
 		
 	}
 
+	/*
+	 * Print
+	 */
 	public void print(){
 		System.out.println("Name of the automobile: " + this.make +" "+ this.model);
 		System.out.println("Base price of the automobile: "+ this.baseprice);

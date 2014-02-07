@@ -1,3 +1,8 @@
+/*
+ * Interface for create an auto
+ */
+
+
 package adapter;
 
 public interface CreateAuto {

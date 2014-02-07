@@ -1,6 +1,6 @@
 Autoname:
 Ford
-Wagon ZTW
+Wagon PPP
 Base Price:
 18445
 Number of Option Sets:
@@ -45,10 +45,6 @@ Price:
 0
 Option9:
 Pitch Black Clearcoat
-Price: 
-0
-Option10:
-Cloud 9 White Clearcoat
 Price: 
 0
 --------------------------

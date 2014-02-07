@@ -1,13 +1,13 @@
 Autoname:
 Ford
-Wagon ZTW
+Wagon QQQ
 Base Price:
-18445
+888888
 Number of Option Sets:
 5
 --------------------------
 Option Set 1:
-Color
+
 Number of Options:
 10
 
@@ -96,7 +96,7 @@ Price:
 Option2:
 Selected
 Price: 
-350
+
 --------------------------
 Option Set 5:
 Power Moonroof
@@ -108,6 +108,6 @@ None
 Price: 
 0
 Option2:
-Selected:
+
 Price:
 595

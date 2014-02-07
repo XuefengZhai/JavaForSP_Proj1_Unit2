@@ -1,3 +1,7 @@
+/*
+ * Interface for update an auto
+ */
+
 package adapter;
 
 public interface UpdateAuto {

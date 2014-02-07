@@ -10,7 +10,6 @@ import model.*;
 public class Driver {
 
 	public static void main(String[] args) {
-		
 		/*
 		 * Test interface
 		 */
@@ -76,7 +75,37 @@ public class Driver {
 		
 		System.out.println();
 		newFordZTW.print();
+		
+		
+		/*
+		 * Test Customer Exception
+		 */
+		System.out.println();
+		System.out.println("Testing customer exception and fix");
 
+		/*
+		 * Exception 1: Empty file name and fix
+		 */
+		
+		auto.buildAuto(""); // fix: Enter a file name: src/data3.txt
+		auto.printAuto("Wagon ZZZ");
+		
+		
+		/*
+		 * Exception 2: Missing Option Set Name and fix
+		 * Exception 3: Price of option is empty and fix
+		 * Exception 4: Missing Option Name and fix
+		 */
+		System.out.println();
+		auto.buildAuto("src/data4.txt"); //fix: Enter a number
+		auto.printAuto("Wagon QQQ");	//fix: Enter the name: Selected
+		
+		
+		/*
+		 * Exception 5: Missing an Option in the Option Set
+		 */
+		auto.buildAuto("src/data5.txt");
+		
 	}
 
 }

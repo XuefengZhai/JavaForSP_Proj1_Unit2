@@ -1,8 +1,8 @@
 Autoname:
 Ford
-Wagon ZTW
+Wagon ZZZ
 Base Price:
-18445
+888888
 Number of Option Sets:
 5
 --------------------------
