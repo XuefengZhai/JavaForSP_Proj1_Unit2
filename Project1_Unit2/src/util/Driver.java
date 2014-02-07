@@ -22,18 +22,24 @@ public class Driver {
 		System.out.println("Print the first model:");
 		auto.printAuto("Wagon ZTW");
 		
+		/*
+		 * Test Change option price and option set name
+		 */
+
 		System.out.println();
 		System.out.println("Change option price and name");
-		
 		auto.updateOptionPrice("Wagon ZTW", "Transmission", "Automatic", 1000);
 		auto.updateOptionSetName("Wagon ZTW", "Transmission", "AHHHHHHHH");
 		System.out.println();
 		System.out.println("Print the first model after the change:");
-
+		
 		auto.printAuto("Wagon ZTW");
+		
+		/*
+		 * Test another model
+		 */
 		System.out.println();
 		System.out.println("Print the second model:");
-
 		auto.printAuto("Wagon XYZ");
 		
 		
@@ -57,7 +63,20 @@ public class Driver {
 		System.out.println("Get option price for Air Bags: " + FordZTW.getOptionChoicePrice("Side Impact Air Bags"));
 		System.out.println("Get total price: " + FordZTW.getTotalPrice());
 		
+		/*
+		 * Test Serialize
+		 */
+		System.out.println();
+		System.out.println("Serialize...");
+		fio.serializeAuto(FordZTW);
 		
+		System.out.println();
+		System.out.println("Deserialize...");
+		Automobile newFordZTW = fio.deserializeAuto("src/serializeAuto.dat");
+		
+		System.out.println();
+		newFordZTW.print();
+
 	}
 
 }
