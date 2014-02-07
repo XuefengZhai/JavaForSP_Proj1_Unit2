@@ -56,6 +56,8 @@ public class Driver {
 		System.out.println("Option choice for Color: " + FordZTW.getOptionChoice("Color"));
 		System.out.println("Get option price for Air Bags: " + FordZTW.getOptionChoicePrice("Side Impact Air Bags"));
 		System.out.println("Get total price: " + FordZTW.getTotalPrice());
+		
+		
 	}
 
 }
