@@ -4,6 +4,10 @@
  */
 package model;
 
+import java.util.ArrayList;
+
+import model.OptionSet;
+
 /*
  * Automobile Serializable Class
  */
@@ -12,9 +16,10 @@ java.io.Serializable
 {
 
 	private static final long serialVersionUID = 6867974146880162446L;
-	private String name;
+	private String make;
+	private String model;
 	private float baseprice;
-	private OptionSet optset[];
+	private ArrayList<OptionSet> optSet;
 	
 	/*
 	 * Constroctors
@@ -23,62 +28,77 @@ java.io.Serializable
 	
 	}
 
-	public Automobile(String name, float baseprice, int size) {
-		this.name = name;
+	public Automobile(String make, String model, float baseprice) {
+		this.make = make;
+		this.model = model;
 		this.baseprice = baseprice;
-		optset = new OptionSet[size];
-		for(int i=0;i<optset.length;i++){
-			optset[i] = new OptionSet();
-		}
+		optSet = new ArrayList<OptionSet>();
 	}
 
 	/*
 	 * Getters
 	 */
-	public String getName() {
-		return name;
+	public String getMake() {
+		return make;
 	}
-
+	
+	public String getModel() {
+		return model;
+	}
+	
 	public float getBaseprice() {
 		return baseprice;
 	}
-	
-	public OptionSet getOpset(int index) {
-		return optset[index];
+		
+	public String getOptionChoice(String setName){
+		return findOptSet(setName).getOptChoice().getName();
 	}
-
 	
-	public OptionSet[] getOpset(){
-		return optset;
+	public float getOptionChoicePrice(String setName){
+		return findOptSet(setName).getOptChoice().getPrice();	
+		}
+	
+	public float getTotalPrice(){
+		
+		float totalPrice = 0;
+		for(int i=0;i<optSet.size();i++){
+			totalPrice = totalPrice + optSet.get(i).getOptChoice().getPrice();
+			}
+		return totalPrice;
 	}
-
 
 	/*
 	 * Setters
 	 */
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMake(String make) {
+		this.make = make;
+	}
+	
+	public void setModel(String model) {
+		this.model = model;
 	}
 
 	public void setBaseprice(float baseprice) {
 		this.baseprice = baseprice;
 	}
-
-	/*
-	 * Set option set
-	 */
-	public void setOptset(String name, int optIndex, int size) {
-		
-		optset[optIndex] = new OptionSet(name, size);		
+	
+	public void setOptionChoice(String setName, String optionName ){
+		findOptSet(setName).setOptChoice(optionName);
 	}
 	
-	/*
-	 * Set option of an option set
-	 */
-	public void setOpt(String name, float price, int setIndex, int optIndex) {
+	
+	
+	public void addOptset(String name) {
 		
-		this.optset[setIndex].setOpt(name, price, optIndex);
+		OptionSet temp = new OptionSet(name);
+		optSet.add(temp);
+	}
+	
+	public void addOpt(String name, float price, int setIndex) {
+		
+		this.optSet.get(setIndex).setOpt(name, price);
+		
 	}
 
 	/*
@@ -86,13 +106,15 @@ java.io.Serializable
 	 */
 	public OptionSet findOptSet(String optionSetName){
 	
-		int i;
-		for(i=0;i<optset.length;i++){
-			if(optionSetName.equals(optset[i].getName())){
+		OptionSet temp = new OptionSet();
+		for(int i=0;i<optSet.size();i++){
+			temp = optSet.get(i);
+			if( temp.getName().equals(optionSetName)){
 				break;
 			}
+		
 		}
-		return optset[i];	
+		return temp;
 	}
 	
 	/*
@@ -101,88 +123,80 @@ java.io.Serializable
 	public OptionSet.Option findOpt(String optionSetName,String optionName){
 		
 		int i,j;
-		for(i=0;i<optset.length;i++){
+		for(i=0;i<optSet.size();i++){
 			
-			if(optionSetName.equals(optset[i].getName())){
+			if(optSet.get(i).getName().equals(optionSetName)){
 				break;
 			}
 		}
 
-		for(j=0;j<optset[i].getOpt().length;j++){
-				if(optionName.equals(optset[i].getOpt(j).getName())){
+		for(j=0;j<optSet.get(i).getOpt().size();j++){
+				if(optSet.get(i).getOpt().get(j).getName().equals(optionName)){
 					break;
 			}
 			
 		}
-		return optset[i].getOpt(j);
+		return optSet.get(i).getOpt(j);
 		
 	}
 	
-	/*
-	 * Delete Option by mark its name by null
-	 */
-	public void deleteOption(String optionSetName, String optionName){
-		findOpt(optionSetName, optionName).setPrice(0);
-		findOpt(optionSetName, optionName).setName(null);
-	}
 	
-	/*
-	 * Delete Option Set by mark its name by null
-	 */
 	public void deleteOptionSet(String name){
-		
-		findOptSet(name).setName(null);
+		int i;
+		for(i=0;i<optSet.size();i++){
+			if( optSet.get(i).getName().equals(name)){
+				break;
+			}
+		}
+		optSet.remove(i);
 		
 	}
 	
-	/*
-	 * Update OptionSet by its name
-	 */
-	public void updateOptionSet (String oldName, String newName){
+	public void deleteOption(String optionSetName, String optionName){
+		int i,j;
+		for(i=0;i<optSet.size();i++){
+			
+			if(optSet.get(i).getName().equals(optionSetName)){
+				break;
+			}
+		}
+
+		for(j=0;j<optSet.get(i).getOpt().size();j++){
+				if(optSet.get(i).getOpt().get(j).getName().equals(optionName)){
+					break;
+			}
+			
+		}
+		optSet.get(i).getOpt().remove(j);
+		
+	}
+
+	public void updateOptionSetName (String oldName, String newName){
 		findOptSet(oldName).setName(newName);
 	}
 	
-	/*
-	 * Update Option by its name
-	 */
-	public void updateOption (String optionSetName, String oldOptionName, String newName, float newPrice){
-		findOpt(optionSetName, oldOptionName).setPrice(newPrice);
-		findOpt(optionSetName, oldOptionName).setName(newName);
-
-		
+	public void updateOption (String optionSetName, String optionName, float newPrice){
+		findOpt(optionSetName, optionName).setPrice(newPrice);
 		
 	}
-	
-	/*
-	 * Print an automobile and its optione sets and options
-	 */
+
 	public void print(){
-		System.out.println("Name of the automobile: " + this.name);
+		System.out.println("Name of the automobile: " + this.make +" "+ this.model);
 		System.out.println("Base price of the automobile: "+ this.baseprice);
 		System.out.println("-----------------------------------------------");
-		for(int i=0;i<optset.length;i++){
+		for(int i=0;i<optSet.size();i++){
 			
-			if(optset[i].getName() == null){
-				continue;
-			}
-			else{
-				System.out.println("  Option Set Name: "+optset[i].getName());
+				System.out.println("  Option Set Name: "+optSet.get(i).getName());
 				System.out.println("  Options:");
-				for(int j=0;j<optset[i].getOpt().length;j++){
-					if(optset[i].getOpt(j).getName() == null){
-						continue;
-					}
-					else{
+				for(int j=0;j<optSet.get(i).getOpt().size();j++){
 						System.out.println();
-						System.out.println("    Name: "+optset[i].getOpt(j).getName());
-						System.out.println("    Price: "+optset[i].getOpt(j).getPrice());
-					}
+						System.out.println("    Name: "+optSet.get(i).getOpt().get(j).getName());
+						System.out.println("    Price: "+optSet.get(i).getOpt().get(j).getPrice());
 				}
 				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 			}
 		}
-	}
-
 }
+
 

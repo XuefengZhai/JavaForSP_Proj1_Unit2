@@ -4,27 +4,30 @@
  */
 package util;
 
-import model.Automobile;
+import adapter.*;
+import model.*;
 
 public class Driver {
 
 	public static void main(String[] args) {
 		
-		FileIO fio = new FileIO();
-		Automobile FordZTW = fio.buildAutoObject("src/data1.txt");
-		FordZTW.print();
+		BuildAuto auto = new BuildAuto();
+
+		auto.buildAuto("src/data1.txt");
+
+		auto.buildAuto("src/data2.txt");
+
+
+		auto.printAuto("Wagon ZTW");
 		
-		System.out.println();
-		System.out.println("Serialize...");
-		fio.serializeAuto(FordZTW);
+		auto.updateOptionPrice("Wagon ZTW", "Transmission", "Automatic", 1000);
+		auto.updateOptionSetName("Wagon ZTW", "Transmission", "AHHHHHHHH");
+		auto.printAuto("Wagon ZTW");	
+		auto.printAuto("Wagon XYZ");
 		
-		System.out.println();
-		System.out.println("Deserialize...");
-		Automobile newFordZTW = fio.deserializeAuto("src/serializeAuto.dat");
 		
-		System.out.println();
-		newFordZTW.print();
-				
+		Automobile a1 = new Automobile();
+		
 	}
 
 }

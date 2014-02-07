@@ -3,7 +3,7 @@
  * xzhai@cmu.edu
  */
 package util;
-import model.Automobile;
+import model.*;
 import java.io.*;
 
 /*
@@ -24,6 +24,7 @@ public class FileIO {
 		/*
 		 * Variables for save data
 		 */
+		String autoMake = null;
 		String autoName = null;
 		float autoPrice = 0;
 		int optSetSize = 0;
@@ -42,12 +43,13 @@ public class FileIO {
 			BufferedReader buff = new BufferedReader(file);
 
 			buff.readLine();
+			autoMake = buff.readLine();
 			autoName = buff.readLine();
 			buff.readLine();	
 			autoPrice = Float.parseFloat(buff.readLine());
 			buff.readLine();
 			optSetSize = Integer.parseInt(buff.readLine());
-			model = new Automobile(autoName,autoPrice,optSetSize);
+			model = new Automobile(autoMake,autoName,autoPrice);
 			
 			/*
 			 * Read in option sets in the loop
@@ -58,7 +60,7 @@ public class FileIO {
 				optSetName = buff.readLine();
 				buff.readLine();
 				optSize = Integer.parseInt(buff.readLine());
-				model.setOptset(optSetName,i,optSize);
+				model.addOptset(optSetName);
 				buff.readLine();
 				/*
 				 * Read in options in the loop
@@ -69,10 +71,10 @@ public class FileIO {
 					optName = buff.readLine();
 					buff.readLine();
 					optPrice = Float.parseFloat(buff.readLine());
-					model.setOpt(optName, optPrice, i, j);
+					model.addOpt(optName, optPrice, i);
 				}	
 			}
-					
+	
 			buff.close();
 			
 		}catch (IOException e) {

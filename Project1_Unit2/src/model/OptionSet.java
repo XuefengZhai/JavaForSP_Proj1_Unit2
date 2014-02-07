@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /*
  * OptionSet serializable class
  */
@@ -13,7 +15,8 @@ java.io.Serializable
 	
 	private static final long serialVersionUID = 3024128351917169821L;
 	private String name;
-	private Option opt[];
+	private ArrayList<Option> opt;
+	private Option choice;
 	
 	/*
 	 * Constructors
@@ -22,16 +25,12 @@ java.io.Serializable
 		
 	}
 
-	protected OptionSet(String name, int size) {
+	protected OptionSet(String name) {
 		
 		this.name = name;
-		opt = new Option[size];
-		
-		for(int i=0;i<opt.length;i++){
-			opt[i] = new Option();
-		}
-
+		opt = new ArrayList<Option>();
 	}
+
 	/*
 	 * Getters
 	 */
@@ -40,11 +39,15 @@ java.io.Serializable
 	}
 
 	protected Option getOpt(int index) {
-		return opt[index];
+		return opt.get(index);
 	}
 	
-	protected Option[] getOpt(){
+	protected ArrayList<Option> getOpt(){
 		return opt;
+	}
+		
+	protected Option getOptChoice(){
+		return choice;
 	}
 	
 	/*
@@ -54,9 +57,21 @@ java.io.Serializable
 		this.name = name;
 	}
 
-	protected void setOpt(String name, float price, int index) {
+	protected void setOpt(String name, float price) {
 		
-		this.opt[index] = new Option(name, price);
+		Option newOption = new Option(name, price);
+		opt.add(newOption);
+	}
+	
+	protected void setOptChoice(String optionName){
+		Option temp = new Option();
+		for(int i=0;i<opt.size();i++){
+			temp = opt.get(i);
+			if(temp.getName().equals(optionName)){
+				break;
+			}
+		}
+		this.choice = temp;
 	}
 	
 	/*
