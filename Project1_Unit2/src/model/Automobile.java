@@ -62,7 +62,11 @@ java.io.Serializable
 		
 		float totalPrice = 0;
 		for(int i=0;i<optSet.size();i++){
-			totalPrice = totalPrice + optSet.get(i).getOptChoice().getPrice();
+			if( optSet.get(i).getOptChoice() == null){
+				continue;
+			}
+			else
+				totalPrice = totalPrice+optSet.get(i).getOptChoice().getPrice();
 			}
 		return totalPrice;
 	}

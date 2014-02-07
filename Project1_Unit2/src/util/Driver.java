@@ -26,7 +26,14 @@ public class Driver {
 		auto.printAuto("Wagon XYZ");
 		
 		
-		Automobile a1 = new Automobile();
+		Automobile FordZTW = new Automobile();
+		FileIO fio = new FileIO();
+		FordZTW = fio.buildAutoObject("src/data1.txt");
+		FordZTW.setOptionChoice("Side Impact Air Bags", "Selected");
+		System.out.println(FordZTW.getOptionChoice("Side Impact Air Bags"));
+		System.out.println(FordZTW.getOptionChoicePrice("Side Impact Air Bags"));
+		System.out.println(FordZTW.getTotalPrice());
+
 		
 	}
 

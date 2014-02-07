@@ -29,6 +29,7 @@ java.io.Serializable
 		
 		this.name = name;
 		opt = new ArrayList<Option>();
+		choice = null;
 	}
 
 	/*
